@@ -60,7 +60,7 @@ public class AddSubtract extends JFrame
         pane.add(label1);
         pane.add(label2);
         pane.add(decrementButton);
-        pane.add(incrementButton);
+        pane.add(incrementButton);clear
 
         setSize(WIDTH, HEIGHT);
         setVisible(true);
