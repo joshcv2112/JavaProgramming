@@ -1,6 +1,6 @@
 /*
 Chapter 3 Programming Exercise 10
-Challenge found on page 320 of Programming Exercises text
+Challenge found on page 320 of Java Programming text
 Author: Joshua Vaughan
 Date: Sept 25, 2016
 */

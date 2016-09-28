@@ -71,11 +71,15 @@ public class AddSubtract extends JFrame
     {
         public void actionPerformed(ActionEvent e)
         {
+            // Gather variables from JLabels
             String num1 = label1.getText();
             String num2 = label2.getText();
+            // Parse to int.
             int int1 = Integer.parseInt(num1);
             int int2 = Integer.parseInt(num2);
+            // Calculate new value for label2.
             int2 = int1 - int2;
+            // Convert int2 to a string and update label2 with new value.
             num2 = Integer.toString(int2);
             label2.setText(num2);   
         }
@@ -85,11 +89,15 @@ public class AddSubtract extends JFrame
     {
         public void actionPerformed(ActionEvent e)
         {
+            // Gather variables from JLabels.
             String num1 = label1.getText();
             String num2 = label2.getText();
+            // Parse to int.
             int int1 = Integer.parseInt(num1);
             int int2 = Integer.parseInt(num2);
+            // Calculate new value for label1.
             int1 += int2;
+            // Convert int1 back to a string and update label1 with new value.
             num1 = Integer.toString(int1);
             label1.setText(num1);
         }
