@@ -22,6 +22,7 @@ public class Calculator extends JFrame
     private static final int WIDTH = 300;
     private static final int HEIGHT = 500;
 
+    // START constructor functions
     private void setButtons()
     {
         for (int i = 0; i < 10; i++)
@@ -39,6 +40,8 @@ public class Calculator extends JFrame
 
     private void setButtonsHandler()
     {
+        buttonHandler = new ButtonHandler();
+
         for (int i = 0; i < 10; i++)
             numberButtons[i].addActionListener(buttonHandler);
         
@@ -52,18 +55,14 @@ public class Calculator extends JFrame
         exitB.addActionListener(buttonHandler);
     }
 
-    public Calculator()
+    private void setTextField()
     {
-        buttonHandler = new ButtonHandler();
-        // Add buttons
-        setButtons();
-        setButtonsHandler();
-
-        
-        // START panel1 setup
         textField = new JTextField("", 60);
         textField.setHorizontalAlignment(JTextField.CENTER);
+    }
 
+    private void setPanels()
+    {
         panel1 = new JPanel();
         panel1.setLayout(new GridLayout(1, 1));
         panel1.add(textField);
@@ -111,7 +110,10 @@ public class Calculator extends JFrame
         panel6.add(clearB);
         panel6.add(exitB);
         // END Panel 6 setup.
+    }
 
+    private void setPane()
+    {
         pane = getContentPane();
         pane.setLayout(new GridLayout(6, 1));
         pane.add(panel1);
@@ -120,11 +122,25 @@ public class Calculator extends JFrame
         pane.add(panel4);
         pane.add(panel5);
         pane.add(panel6);
+    }
 
+    private void setWindowSettings()
+    {
         setTitle("Calculator");
         setSize(WIDTH, HEIGHT);
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+    }
+    // END constructor functions
+    
+    public Calculator()
+    {
+        setButtons();
+        setButtonsHandler();
+        setTextField();
+        setPanels();
+        setPane();
+        setWindowSettings();
     }
 
     private class ButtonHandler implements ActionListener
