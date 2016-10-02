@@ -59,6 +59,7 @@ public class Calculator extends JFrame
     {
         textField = new JTextField("", 60);
         textField.setHorizontalAlignment(JTextField.CENTER);
+        textField.setFont(new Font("SansSerif", Font.BOLD, 20));
     }
 
     private void setPanels()
@@ -145,7 +146,7 @@ public class Calculator extends JFrame
 
     private class ButtonHandler implements ActionListener
     {
-        private String firstNumStr, secondNumStr, answerStr;
+        private String firstNumStr, secondNumStr;
         private boolean isSecond = false;
         private char operation;
 
@@ -163,6 +164,55 @@ public class Calculator extends JFrame
                 firstNumStr += currentNum;
                 textField.setText("");
             }
+        }
+
+        private void calculate(String currentNum)
+        {
+            if (isSecond)
+            {
+                secondNumStr = textField.getText();
+                textField.setText("");
+                double x1 = Double.parseDouble(firstNumStr);
+                double x2 = Double.parseDouble(secondNumStr);
+                double answer = 0;
+
+                if (operation == '+')
+                {
+                    answer = x1 + x2;
+                }
+                else if (operation == '-')
+                {
+                    answer = x1 - x2;
+                }
+                else if (operation == '*')
+                {
+                    answer = x1 * x2;
+                }
+                else if (operation == '/')
+                {
+                    answer = x1 / x2;
+                    // Add divide by zero exception.
+                }
+
+                String answerString = String.valueOf(answer);
+                textField.setText(answerString);
+            }
+            else
+            {
+                // Send warning message saying that there has only been one input
+            }
+        }
+
+        public void clearText()
+        {
+            firstNumStr = "";
+            secondNumStr = "";
+            isSecond = false;
+            textField.setText("");
+            /*
+                Maybe add functionality to click once to only delete second number, 
+                click twice to reset entire current calculation.
+            */
         }
 
         public void actionPerformed(ActionEvent e)
@@ -191,13 +241,13 @@ public class Calculator extends JFrame
                     arithmetic(currentNum, buttonPressed);
                     break;
                 case ".":
-                
+                    // Do something with this
                     break;
                 case "=":
-                    // Calculate.
+                    calculate(currentNum);
                     break;
                 case "C":
-
+                    clearText();
                     break;
                 case "Exit":
                     System.exit(0);
