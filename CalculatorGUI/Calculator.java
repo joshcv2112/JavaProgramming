@@ -132,7 +132,7 @@ public class Calculator extends JFrame
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
     // END constructor functions
-    
+
     public Calculator()
     {
         setButtons();
@@ -145,12 +145,64 @@ public class Calculator extends JFrame
 
     private class ButtonHandler implements ActionListener
     {
+        private String firstNumStr, secondNumStr, answerStr;
+        private boolean isSecond = false;
+        private char operation;
+
+        private void arithmetic(String currentNum, String op)
+        {
+            if (!isSecond)
+            {
+                firstNumStr = textField.getText();
+                operation = op.charAt(0);
+                isSecond = !isSecond;
+                textField.setText("");
+            }
+            else
+            {
+                firstNumStr += currentNum;
+                textField.setText("");
+            }
+        }
+
         public void actionPerformed(ActionEvent e)
         {
-            String str = e.getActionCommand();
+            String buttonPressed = e.getActionCommand();
+            String currentNum = textField.getText();
 
-            if (str.equals("Exit"))
-                System.exit(0);
+            switch(buttonPressed)
+            {
+                case "0":
+                case "1":
+                case "2":
+                case "3":
+                case "4":
+                case "5":
+                case "6":
+                case "7":
+                case "8":
+                case "9":
+                    textField.setText(currentNum + buttonPressed);
+                    break;
+                case "+":
+                case "-":
+                case "*":
+                case "/":
+                    arithmetic(currentNum, buttonPressed);
+                    break;
+                case ".":
+                
+                    break;
+                case "=":
+                    // Calculate.
+                    break;
+                case "C":
+
+                    break;
+                case "Exit":
+                    System.exit(0);
+                    break;
+            }
         }
     }
 }
