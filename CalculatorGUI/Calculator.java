@@ -148,6 +148,8 @@ public class Calculator extends JFrame
     {
         private String firstNumStr, secondNumStr;
         private boolean isSecond = false;
+        private boolean firstHasDecimal = false;
+        private boolean secondHasDecimal = false;
         private char operation;
 
         private void arithmetic(String currentNum, String op)
@@ -190,8 +192,11 @@ public class Calculator extends JFrame
                 }
                 else if (operation == '/')
                 {
-                    answer = x1 / x2;
-                    // Add divide by zero exception.
+                    if (x2 == 0)
+                        JOptionPane.showMessageDialog(null, "You cannot divide by zero!", 
+                            "Division by Zero Error", JOptionPane.ERROR_MESSAGE);
+                    else
+                        answer = x1 / x2;
                 }
 
                 String answerString = String.valueOf(answer);
@@ -213,6 +218,27 @@ public class Calculator extends JFrame
                 Maybe add functionality to click once to only delete second number, 
                 click twice to reset entire current calculation.
             */
+        }
+
+        public void decimal(String currentNum)
+        {
+            String num = textField.getText();
+            if (!isSecond)
+            {
+                if (!firstHasDecimal)
+                {
+                    textField.setText(num + ".");
+                    firstHasDecimal = true;
+                }
+            }
+            else
+            {
+                if (!secondHasDecimal)
+                {
+                    textField.setText(num + ".");
+                    secondHasDecimal = true;   
+                }
+            }
         }
 
         public void actionPerformed(ActionEvent e)
@@ -241,7 +267,7 @@ public class Calculator extends JFrame
                     arithmetic(currentNum, buttonPressed);
                     break;
                 case ".":
-                    // Do something with this
+                    decimal(currentNum);
                     break;
                 case "=":
                     calculate(currentNum);
